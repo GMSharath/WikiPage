@@ -1,0 +1,577 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="STYLE/main.css">
+    <title>NZTADEVHandbook</title>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Suit</title>
+</head>
+<body>
+    
+  <!-- HEADER -->
+  <!-- <div style="font-family: Verdana, Helvetica, sans-serif;background: #ffffff;margin-right: 0%;margin-left: 0%;padding: 0.5em;border-top: 1px solid;border-left: 1px solid;border-right: 1px solid;border-color: #bbbbbb;"> -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="headline">
+       <tr>
+         <td>
+           <a class="logo" href="index.html">
+           <img align="left" border="0" alt="UNISYS" src="IMG/UNISYS.png">
+            </a>
+         </td>
+         <td align="center">
+           <h1 >NZTA ABSuit Handbook</h1>
+           <br>
+         </td>
+         <td>
+           <a class="logo" href="index.html">
+           <img align="right" border="0" alt="NZTA" src="IMG/NZTA.png">
+            </a>
+         </td>
+       </tr>					 
+    </table>
+ </div>
+
+
+ <!-- MENU -->
+ <table>
+   <tr>
+     <td width="10">&nbsp;</td>
+     <td>
+       <span class="pageHeader">How To...</span>
+     </td>
+   </tr>
+ </table>
+
+ <div class="menu">
+   <a href='index.html'>Home</a> |
+   <a href='#'>Search</a> |
+ </div>
+
+ <!-- CONTENTS -->
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">    
+   <tr>
+     <!-- SIDEBAR -->
+     <td nowrap class="leftMenu" valign="top" width="10%">
+       <a class="topic" href="index.html">How-To...</a><br/>
+       <a class="topic" href="ProjectCodes.html">ProjectCodes</a><br/>
+       <a class="topic" href="Servers.html">Servers</a><br/>
+       <a class="topic" href="Tools.html">Tools</a><br/>
+       <a class="topic" href="People.html">People</a><br/>
+
+       <br/>
+       <strong>Support</strong><br/>
+       <a class="topic" href="ABSuiteReleases.html">ABSuiteReleases</a> <br/>
+       <a class="topic" href="ABSuiteSetup.html">ABSuiteSetup</a> <br/>
+       <a class="topic" href="TroubleShoot.html">TroubleShooting</a> <br/>
+
+
+       <br/>
+       <hr />
+       <strong>Releases</strong><br/>
+       <a class="topic" href="Projects.html">Projects</a><br/>
+       <a class="topic" href="AzureDevOps.html">Azure DevOps</a><br/>
+
+       <br/>
+       <hr />
+       <strong>Production</strong><br/>
+       <a class="topic" href="NZTASignOn.html">NZTA Register</a><br/>
+       <a class="topic" href="AC.html">AC</a><br/>
+       <a class="topic" href="DLR.html">DLR</a><br/>
+       <a class="topic" href="MVR.html">MVR</a><br/>
+
+       <br/>
+       <hr />
+       <a class="topic" href="WikiSearch.html">WikiSearch</a><br/>
+    
+     </td>
+
+ 
+     <td valign="top">
+          <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setup and Troubleshooting Guide</title>
+</head>
+<body>
+    <div class="TFA">
+        <h2>Kindly find the brief steps to set up the stream</h2>
+        <ol>
+            <li>Create a folder for new environment eg: 2019_110 in VSTS folder.</li>
+            <li>"Get latest version" in Visual Studio for access control, land data and DLR environments in the new stream (2019_110).</li>
+            <li>In case mapping to new stream folder is not done then perform the mapping first.</li>
+            <li>Next get the DLRLOAD.bat file (similar files for MVR and access control) from previous environment and place it in new DLR, MVR and access control folder under 2019_110 folder.</li>
+            <li>Next update the .bat file with new TFS path and stream name (2019_110).</li>
+            <li>Run the .bat file as admin.</li>
+            <li>Follow the same process for MVR and access control. (This process would take a while.)</li>
+        </ol>
+    </div>
+
+    <div class="TFA">
+        <h2>While the above is executing perform the below</h2>
+        <h3>Code back up:</h3>
+        <ul>
+            <li>Next stop and disable the cloning DB if required. Ideally in SQL 2014 disabling the DB is not required. – ACDEV8, LTDEV8, DLDEV8 - Admin tool.</li>
+            <li>Directly open SQL Server, right-click on the DB to be cloned --> tasks --> backup -- ACDEV8, LTDEV8, DLDEV8.</li>
+            <li>Remove the existing location for backup.</li>
+            <li>Select the path where the backup has to be placed (it's D:\Microsoft SQL\..).</li>
+            <li>Mention a meaningful name for the backup file like "DLDEV08_BACKUP_FOR_2019_110.bak". Ensure the extension is mentioned as ".bak".</li>
+            <li>Also select the backup option as "compressed backup". Click 'OK' and take the backup.</li>
+            <li>Perform the same for ACDEV and LTDEV.</li>
+            <li>Enable runtime system of ACDEV8, LTDEV8, DLDEV8 in the admin tool.</li>
+        </ul>
+    </div>
+
+    <div class="TFA">
+        <h2>Trouble Shooting Guide</h2>
+        <p>Below are some issues encountered and suggested solutions on how to resolve them:</p>
+
+        <h3>Generate issue which is missing the dbo._SysStatus table from the database</h3>
+        <p>This issue is similar to the “Winforms or website URL connection issues” section below.</p>
+        <p>Double-click the icon to open the word document.</p>
+
+        <h3>Winforms or website URL connection issues #1</h3>
+        <p>If you get the following connection errors, it could potentially mean that there is a system database table missing (i.e., dbo._SysStatus).</p>
+
+        <h4>Winforms:</h4>
+        <p></p>
+
+        <h4>Website URL:</h4>
+        <p></p>
+
+        <p>System Logs will give a clue to the issue:</p>
+        <p></p>
+
+        <p>Check SQL database to see if this file is missing:</p>
+        <p></p>
+
+        <h4>For the LTDEV3 winforms issue:</h4>
+        <p>The table file “dbo._SysStatus” is missing for the database.</p>
+
+        <h4>For the ACDEV3 website URL issue:</h4>
+        <p>The table file “dbo._SysStatus” is missing for the database.</p>
+
+        <h4>Solution:</h4>
+        <p>You will need to restore a backup of the database until you find a backup which contains the “dbo._SysStatus” table.</p>
+        <p>This is an example of where the databases are backed up to and you’ll need to find a recent copy and restore it to check if the “dbo._SysStatus” table is present after the restore using the process below.</p>
+        <p><strong>Note:</strong> The cause of this issue is yet to be determined.</p>
+
+        <h4>Process to restoring a database:</h4>
+        <ol>
+            <li>Start SQL Server Management Studio and right mouse click “Database” and select “Restore Database…”.</li>
+            <li>Click “Add” to restore from a backup file.</li>
+            <li>Select the .bak backup file to restore and click OK button.</li>
+            <li>Click “Options” and tick the “Overwrite the existing database (WITH REPLACE)” and untick “Take tail-log backup before restore”. Then click “OK” button to start the restore.</li>
+            <li>After the restore has been successful then click the refresh button.</li>
+            <li>Now check that the “dbo._SysStatus” is present.</li>
+            <li>Use Admin Tool to stop and then enable the runtime system. Then you can use winforms or website URL to access the runtime system.</li>
+        </ol>
+
+        <h3>Website URL connection issues #2 (which is ABSuite related to do with Views)</h3>
+        <p>This is an issue that is encountered as part of the automated website build/release process. I’ve included the example here to help troubleshoot if this does occur. The main cause is where there isn’t a “View” created in the AB Suite Admin Tool. This shouldn’t be an issue in the future as we’ll be creating this as part of the automated website build/release process.</p>
+
+        <p>There is an automated test script which smoke tests the website build. So if this fails then investigate what is the cause. Click on the “Test results” file to get the details.</p>
+        <p>Then click on the *.trx file to open the log details.</p>
+        <p>Click the “Open” button.</p>
+        <p>This shows the reason for failure. Since each error could mean a different issue. In this case this is most likely to do with the Admin Tool Views.</p>
+
+        <h4>Solution:</h4>
+        <p>Run AB Suite “Admin Tool” and ensure that the view is added for the system and that the properties are setup correctly.</p>
+
+        <h3>Website URL connection issues #3 (which isn’t ABSuite related)</h3>
+        <p>If the issue with connecting to the website then the AB Suite Admin Tool view may not be setup for the website.</p>
+        <p>Example of what maybe displayed when connecting to the website.</p>
+        <p>Check the System log files to see if the error is because of the view.</p>
+
+        <h4>Solution:</h4>
+        <p>Start Admin Tool.</p>
+        <p>Check to see if “ACDEV1” is present. If not then add it with the details below.</p>
+        <p>Remember to add the NZTAN\absuser password M0nday1.</p>
+
+        <h3>Website URL connection issues #4 (which isn’t ABSuite related)</h3>
+        <p>If the issue with connecting to the website (or maybe winforms). Then the cause may not be related to the AB Suite database tables missing a system table. But instead there could be another process which is using all the resources to prevent you from connecting. This is just one example where the Ratl socket is being hammered which prevents other users from connecting.</p>
+        <p>This is a screenshot of an example of not being able to connect to a website URL. But ensure first that there were no changes which could affect this website eg. check if other runtime systems are working. Also, that the website doesn’t require rebuilding. If this is the case then the issue is with something else which isn’t AB Suite code related.</p>
+        <p>Check the website logs to see if there are any issues. In this case the issue is a timeout. So need to look further in system logs.</p>
+        <p>Another website logs doesn’t show much.</p>
+        <p>Looking at the system logs it shows there a lot of Ratl connections. So this gives a hint as to what maybe the issue.</p>
+        <p>Logon to the runtime server (eg. ta-devabapp-05) and check task manager.</p>
+        <p>Look for “RatlSocket.exe” and highlight it.</p>
+        <p>Click on the “Network” tab to see which VDI user is using the Ratl socket. Then find out who this person is by either contacting operations team (ie. Steve Stokes) to find out who is ta-devw8vd-42 (which in this case is Vijira).</p>
+
+        <h4>Solution:</h4>
+        <p>Need to find out who is using the Ratl socket. Then try and stop/start the Ratl socket on the application server (eg. ta-devabapp-05) to see if this resolves the issue.</p>
+       
+        <h2>Troubleshooting Steps</h2>
+        <ol>
+            <li>Check the properties to ensure it’s the correct application.</li>
+            <li>Find the Ratl service. This will stop Ratl. This shows the service is terminated (i.e., stopped).</li>
+            <li>Start the Ratl service. A new PID is created for the Ratl.</li>
+            <li>Check that you can now logon to the runtime systems. If not, then you’ll need to check what is causing the issue again. If it happens to be the Ratl is hogging the resources then we may need to contact the developer whose VDI is holding up the process or get operations team to restart the developer's VDI to stop any process currently running.</li>
+            <li>Website URL connection issues #5 (which is ABSuite related): When trying to connect to the Landata runtime via Access Control, the following error occurred. Have a look at the runtime system logs to see what the error is being displayed.</li>
+            <li>Hint: Look at the “machine TA-DEVABAPP-05” which is now decommissioned (i.e., doesn’t exist anymore).</li>
+            <li>The issue was that the runtime server was incorrect. Should be “TA-DEVABAPP-07”. As the server “TA-DEVABAPP-05” has now been decommissioned and hence the hub couldn’t find this server.</li>
+            <li><strong>Solution:</strong> Change to the correct server name “TA-DEVABAPP-07”.</li>
+            <li>Website not displaying the new screen: The reason why the website may not display the new screen even though you have set up the USCRN and UACC and also the screen is viewable via Winforms, is that the website solution doesn’t know about the new screen and this needs to be added to Website.csproj. Please refer to “Adding a new web screen for website build” section above.</li>
+            <li>Access Control logon issues – Unknown Terminal on Winforms: If using winforms and trying to logon to Access control and you receive the following message, then a terminal record needs to be created via CTERM screen.</li>
+            <li><strong>Solution:</strong> Logon to Access Control (if possible) and add in the terminal based upon the first 8 characters. Then try winforms to logon again.</li>
+            <li>Logging on system (e.g., Access Control) and the screen is not navigating correctly</li>
+            <li><strong>Solution:</strong> Start Admin Tool. Try deleting the runtime system from the TA-DEVABAPP-05 server using the steps in section “Troubleshooting Guide → How to delete a runtime system”. This should remove the DLL files from the &lt;database system&gt;\core\bin folder and then do the install phase again.</li>
+            <li><strong>System Generate says that the install failed because the database system is still “In Use” Or the system thinks a report is still currently running.</strong></li>
+            <li><strong>Solution 1:</strong> Start Admin Tool. For the database, manually “Disable” the runtime system. Then perform the install phase again (via build scripts).</li>
+            <li><strong>Solution 2:</strong> Start Admin Tool. Try deleting the runtime system from the TA-DEVABAPP-05 server using the steps in section “Troubleshooting Guide → How to delete a runtime system”. This should remove the DLL files from the &lt;database system&gt;\core\bin folder and then do the install phase again (via build scripts).</li>
+            <li><strong>Note:</strong> If you only did a “folder only” build then the reports won’t be generated as part of the install. So you’ll need to do a full system generate.</li>
+            <li><strong>Unable to access the AB Suite source code:</strong> The reason for this is that the code repository hasn’t been built yet. If you get the message below then you’ll need to build the code repository first. But check why this is the case as it maybe that the release team may want us to hold off building the code repository because they may want to upstream some code first.</li>
+            <li><strong>Stopping runtime database systems which won’t allow the database to be “Stopped”</strong></li>
+            <li>Logon to the runtime application server (ta-devabapp-05). Note: Better to open on your own VDI as you can then use Notepad++ (Because you’ll need to run it as administrator mode).</li>
+            <li><strong>Modifying the NGRuntime.XML file:</strong></li>
+            <li>Backup and change the NGRuntime.XML first. Then we’ll modify the NGRuntime.XML file to trick the system that it has stopped.</li>
+            <li><strong>Stopping the runtime processes to pick up the new version of NGRuntime.XML file</strong></li>
+            <li>Run admin tool. Stop these processes first.</li>
+            <li>Highlight all these database runtime system processes and select “Shut down”.</li>
+            <li>Then highlight all the AB Suite runtime processes and select “Shut down”.</li>
+            <li>When all the above processes are stopped, the next time Admin Tool is started it will pick up the new version of the NGRuntime.XML.</li>
+            <li>Stop and start admin tool and check that the AB Suite runtimes are invoked.</li>
+            <li>You can now “Disable” the runtime system (e.g., LTBAUSYS).</li>
+            <li><strong>Runtime system install failed OR trying to remove runtime system:</strong> When an AB Suite runtime install failed OR trying to remove an AB Suite runtime system then there may be an issue with the current runtime system.</li>
+            <li><strong>Example:</strong> The install logs show that the runtime system couldn’t be found. There is also not active runtime system as the “Enable, Disable and Stop” is greyed out.</li>
+            <li><strong>Deployment log files:</strong></li>
+            <li>This shows that there is an issue with the runtime installation (see highlight in yellow below).</li>
+        </ol>
+        <OL>
+            <PRE>
+              
+2017-10-18 15:36:36.629 DeploymentServer(6052:13992) [NZTAN\ngand]; Uninstalling: '{EF4424DF-9F06-47DB-8987-9BB5BF3903BC}'
+2017-10-18 15:36:50.511 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:50.511 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; >> Uninstalling package <<
+2017-10-18 15:36:50.511 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:50.511 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; CustomActionData is: sessionId=-1 dropDB=TRUE dropBS= deleteFiles=
+2017-10-18 15:36:50.995 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:50.995 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; * Getting parameters from Session object
+2017-10-18 15:36:50.995 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:50.995 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; >> Starting Application Disable script <<
+2017-10-18 15:36:50.995 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:50.995 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; targetSystemName is: ACCESSCTRL
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; installDir is: D:\ABSuiteRuntime\
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; sessionId is: -1
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; deploySeg is: 0
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; dataBase is: 0
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; report is: 
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; altsysname is: Acdev9Sys
+2017-10-18 15:36:51.010 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; * Getting app Acdev9Sys
+2017-10-18 15:36:51.042 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Starting to look for app
+2017-10-18 15:36:51.042 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Finished looking for app
+2017-10-18 15:36:51.042 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; App not found
+2017-10-18 15:36:51.042 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Script finished
+2017-10-18 15:36:51.088 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:51.088 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; * Getting parameters from Session object
+2017-10-18 15:36:51.088 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:51.088 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; >> Starting Component Uninstallation script <<
+2017-10-18 15:36:51.088 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:51.088 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; targetSystemName is: ACCESSCTRL
+2017-10-18 15:36:51.104 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; installDir is: D:\ABSuiteRuntime\
+2017-10-18 15:36:51.104 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; configName is: Acdev9_Windows
+2017-10-18 15:36:51.104 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; sessionId is: -1
+2017-10-18 15:36:51.104 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; deleteFiles is: 
+2017-10-18 15:36:51.104 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; alternateName is: Acdev9Sys
+2017-10-18 15:36:51.104 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; oltpserver is: FALSE
+2017-10-18 15:36:51.120 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; oltpclient is: FALSE
+2017-10-18 15:36:51.120 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; BackUpXML is: FALSE
+2017-10-18 15:36:51.120 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; builderFactory is: CLRBuilderFactory
+2017-10-18 15:36:51.120 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; folderName is: ACDEV9_Deployment2_Reports
+2017-10-18 15:36:51.120 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; deploySeg is: 0
+2017-10-18 15:36:51.135 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; report is: 
+2017-10-18 15:36:51.135 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; App not found, cannot delete
+2017-10-18 15:36:51.135 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Now delete all OLTP .Net assemblies if available
+2017-10-18 15:36:54.802 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; RegTypeLib.exe -unregister "D:\ABSuiteRuntime\Acdev9_Windows\ACCESSCTRL\Core\Bin\ACCESSCTRL.tlb"
+2017-10-18 15:36:55.442 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Successfully ran RegTypeLib.exe -unregister "D:\ABSuiteRuntime\Acdev9_Windows\ACCESSCTRL\Core\Bin\ACCESSCTRL.tlb"
+2017-10-18 15:36:55.442 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Unregistering business segment and report components
+2017-10-18 15:36:55.457 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Executing : regasm /nologo /u D:\ABSuiteRuntime\\Acdev9_Windows\ACCESSCTRL\Core\Bin\ACCESSCTRL.dll /tlb D:\ABSuiteRuntime\\Acdev9_Windows\ACCESSCTRL\Core\Bin\ACCESSCTRL.tlb
+2017-10-18 15:36:55.489 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; * An error has occurred
+2017-10-18 15:36:55.489 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM];            Error number is: -2147024894
+2017-10-18 15:36:55.504 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM];            Error description is: 
+2017-10-18 15:36:55.504 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM];            Error source is: 
+2017-10-18 15:36:55.504 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Script finished
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; * Getting parameters from Session object
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; >> Starting Database UnInstallation <<
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; targetSystemName is: ACCESSCTRL
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; installDir is: D:\ABSuiteRuntime\
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; targetDB is: ACDEV9DB
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; configName is: Acdev9_Windows
+2017-10-18 15:36:55.551 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; altSysName is: Acdev9Sys
+2017-10-18 15:36:55.567 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; dbAlias is: DSR_Remote_DEVABDB07
+2017-10-18 15:36:55.567 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; sessionId is: -1
+2017-10-18 15:36:55.567 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; dbSchemaName is: AC
+2017-10-18 15:36:55.567 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; deploySeg is: 0
+2017-10-18 15:36:55.567 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; dropDB is: TRUE
+2017-10-18 15:36:55.567 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; dataBase is: 0
+2017-10-18 15:36:55.582 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; report is: 
+2017-10-18 15:36:55.582 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; sqlviews is: FALSE
+2017-10-18 15:36:55.582 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; retainDB is: 
+2017-10-18 15:36:55.863 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Deleting database for system ACCESSCTRL
+2017-10-18 15:36:56.644 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Path to schema is: D:\ABSuiteRuntime\\Acdev9_Windows\ACCESSCTRL\Core\Database\
+2017-10-18 15:37:17.419 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; DB successfully dropped
+2017-10-18 15:37:17.419 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Database removal finished
+2017-10-18 15:37:17.435 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Script finished
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; * Getting parameters from Session object
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; >> Deleting Files <<
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; 
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; installDir is: D:\ABSuiteRuntime\
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; targetSystemName is: ACCESSCTRL
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; sessionId is: -1
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; altSysName is: Acdev9Sys
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; deploySeg is: 0
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; productCode is: EF4424DF-9F06-47DB-8987-9BB5BF3903BC
+2017-10-18 15:37:17.497 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; configName is: Acdev9_Windows
+2017-10-18 15:37:17.513 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; report is: 1
+2017-10-18 15:37:17.513 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; dataBase is: 0
+2017-10-18 15:37:17.513 MsiExec(20128:15288) [NT AUTHORITY\SYSTEM]; Script finished
+2017-10-18 15:37:19.545 DeploymentServer(6052:13992) [NZTAN\ngand]; Uninstallation of '{EF4424DF-9F06-47DB-8987-9BB5BF3903BC}' complete.
+2017-10-18 15:37:19.545 DeploymentServer(6052:13992) [NZTAN\ngand]; Uninstalling: '{}'
+2017-10-18 16:23:55.600 DeploymentServer(6052:12572) [NZTAN\ngand]; Uninstalling: '{}'
+
+
+            </PRE>
+        </OL>
+    </div>
+    <div class="TFA">
+      <h2>Solution:</h2>
+      <p>Perform the sections below “How to delete a runtime system” or “What to do if the delete of the runtime system doesn’t clean up the application folder?”. Then start the runtime install process again to install the system.</p>
+      <h3>How to delete a runtime system</h3>
+      <p>If you need to delete the runtime system then do the following on the application server (eg. TA-DEVABAPP-05).</p>
+      <p>IMPORTANT: Don’t do this from your VDI as this will not work correctly.</p>
+      <ol>
+          <li>Disable the system and then choose “Delete”.</li>
+          <li>Choose following options.</li>
+      </ol>
+      <p>Check that the runtime system folder is also cleaned up where it should remove the dll files for the system. If this doesn’t clean up the application folder then follow the steps on the next section “What to do if the delete of the runtime system doesn’t clean up the application folder”.</p>
+  </div>
+  
+  <div class="TFA">
+      <h2>Windows Install Clean Up App: What to do if the delete of the runtime system doesn’t clean up the application folder?</h2>
+      <p>Log on to the runtime application server (eg. TA-DEVABAPP-07).</p>
+      <p>You’ll need to run the “Windows Install Clean Up” program to clean up the registry for the runtime system that you want to remove.</p>
+      <p>If the “Windows Install Clean Up” program is not available then you’ll need to install this program by running the “msicuu2.exe” file.</p>
+      <p>Once installed then you can search for the “Windows Install Clean Up” icon.</p>
+      <p>Note: This is the old naming convention.</p>
+      <p>Run the “Windows Installer Clean Up” program which will bring up a window of the installed applications on the server.</p>
+      <p>Highlight any products which belong to the system to be removed. Then click the “Remove” button.</p>
+      <p>Click “OK” button.</p>
+      <p>Remove the system entry.</p>
+      <p>Click “Exit” button when done.</p>
+      <p>Run Admin Tool to remove the runtime system</p>
+      <p>Highlight the runtime system to delete.</p>
+      <p>Then do a refresh to ensure that the runtime system was removed. If the runtime system still remains after the refresh then check the event logs.</p>
+      <p>This is an example of the event log when trying to delete “Acdev9Sys” which has an issue. Then the solution is to perform the steps below in section “How to remove the runtime system manually from the NGRuntime.XML”.</p>
+      <p>Manually remove the AB Suite build folder, once the Admin Tool removal of the runtime system has worked correctly. For example, Delete the “ABSuiteRuntime\xxdevx_Windows” folder.</p>
+      <p>If this still doesn’t work then you’ll need to look at manually editing the “NGRuntime.XML” file to remove the system (see section below “How to remove the runtime system manually from the NGRuntime.XML”)</p>
+  </div>
+  
+  <div class="TFA">
+      <h2>How to remove the runtime system manually from the NGRuntime.XML</h2>
+      <p>This is when you are unable to delete the runtime system from the database using the Admin Tool. Editing the NGRuntime.XML file If using the admin tool you still can’t delete the runtime system from the database. Then you’ll need to manually modify the NGRuntime.XML file to remove the runtime system. Then restart the running processing via Admin tool afterwards to pick up the new version of the NGRuntime.XML</p>
+      <p>After you do a “Delete” and refresh the Admin tool, the runtime system is still not removed (eg. LTBAUSYS). Then you’ll need to proceed with the following steps.</p>
+      <p>Backup and change the NGRuntime.XML first. Then we’ll modify the NGRuntime.XML file to remove the runtime system.</p>
+      <p>Make a copy of the file first.</p>
+      <p>Do a paste and a new copy is created as backup.</p>
+      <p>Note you will need to run notepad as administrator on the server. Otherwise, edit the file on your VDI.</p>
+      <p>Edit the “NGRuntime.XML” file.</p>
+      <p>Find the start tag “<system {blah blah blah}>” and end tags for “</system>” for the one you want to remove. Then delete these entries.</p>
+      <p>Note: This could be quite a big select of lines. It would also help to put in some line spacing to make it easier to select.</p>
+      <p>First find the beginning of the tag, in this case it “<system name=”LTBAUSYS” status=”STOPPED” …etc.)”.</p>
+      <p>Then press return to separate the “<system name=….” Tag to a new line.</p>
+      <p>Then find the end tag “</system>” which is located before the start of the next system (eg. LTDEV8DB).</p>
+      <p>Now press return to separate out “</system>” tag from the rest of the lines.</p>
+      <p>Go back to the top of the “<system name=…>” tag and click on the “-“ (minus) symbol which will group the tag.</p>
+      <p>Then select this line and delete it.</p>
+      <p>Now remove these blank lines to tidy it up.</p>
+      <p>Lines are now tidy and click the “Save” button.</p>
+      <p>Stopping the runtime processes to pickup the new version of NGRuntime.XML file</p>
+      <p>Run admin tool</p>
+      <p>Stop these processes first.</p>
+      <p>Highlight all these database runtime system process and select “Shut down”.</p>
+      <p>Then highlight all the AB Suite runtime processes and select “Shut down”.</p>
+      <p>When all the above process are stopped. The next time Admin Tool is started it will pick up the new version of the NGRuntime.XML.</p>
+      <p>Stop and start admin tool and check that the AB Suite runtimes are invoked.</p>
+      <p>Now remove the runtime system from the database.</p>
+      <p>Delete the runtime application LTBAU folder from the runtime server.</p>
+      <p>After that then start the runtime system install again.</p>
+  </div>
+  <div class="TFA">
+    <h2>Missing ispec.xml for the runtime system</h2>
+    <p>If you start the winform application and get the following error then you’ll need to re-install the runtime system to recover the ispec.xml file.</p>
+</div>
+
+<div class="TFA">
+    <h3>Solution:</h3>
+    <p>Follow the procedure in section “Stopping runtime database systems which won’t allow the database to be “Stopped””.</p>
+    <p>Then you’ll need to run the batch file (.bat) for installing the system again.</p>
+    <p>The runtime system install should recover the ispec.xml file and you can now logon to the runtime system.</p>
+</div>
+
+<div class="TFA">
+    <h2>ABSuiteExternalUtils generate issue</h2>
+    <p>When you generate the runtime system, you may encounter the following generate issue.</p>
+</div>
+
+<div class="TFA">
+    <h3>Cause:</h3>
+    <p>If you get the following generate error then it means that the ABSuiteExternalUtils.dll is not installed in the correct runtime system folder.</p>
+</div>
+
+<div class="TFA">
+    <h3>Solution:</h3>
+    <ol>
+        <li>Check if the ABSuiteExternalUtils properties on the code repository is setup correctly pointing to the correct folders on the runtime server located on ta-devabapp-05 server.</li>
+        <li>If the ABSuiteExternalUtils folder doesn’t exist then you’ll need to either point it to the correct folder or if there are changes to the ABSuiteExternalUtils.dll then you’ll need to create a new folder for the project you’re working on and point it to that folder.</li>
+        <li>After making the changes then generate the system again via the batch scripts.</li>
+    </ol>
+</div>
+
+<div class="TFA">
+    <h2>AB Suite Install Issues (RPC server is unavailable)</h2>
+    <p>If installing the AB Suite runtime system (either from the batch script (.bat) OR via the build server) and you encounter the following error that the RPC server is unavailable then the cause is most likely a firewall issue on the build server.</p>
+</div>
+
+<div class="TFA">
+    <h3>Solution:</h3>
+    <p>Logon to the build server (ta-devdb-05) and change the “Windows firewall” settings for the “Domain Profile”.</p>
+</div>
+
+<div class="TFA">
+    <p>Open “Control panel” and double click on the “Windows Firewall” icon.</p>
+</div>
+
+<div class="TFA">
+    <p>Click on “Advanced settings”.</p>
+</div>
+
+<div class="TFA">
+    <p>Click on the “Windows Firewall Properties”</p>
+</div>
+
+<div class="TFA">
+    <p>On the “Domain Profile” change the “Inbound connections” from “Block” to “Allow”.</p>
+</div>
+
+<div class="TFA">
+    <p>This is the cause of the “RPC server is unavailable” message being displayed when it’s set to “Block”.</p>
+</div>
+
+<div class="TFA">
+    <p>Change “Inbound connections” to “Allow” and click the “Apply” button.</p>
+</div>
+
+<div class="TFA">
+    <p>Click the “OK” button to close the window.</p>
+</div>
+
+<div class="TFA">
+    <p>Check that the “Domain Profile is Active” and you can now exit the “Windows Firewall with Advanced Security” by clicking the red “X” at the top-right of the window.</p>
+</div>
+
+<div class="TFA">
+    <p>Check that the “Domain networks” has the “Windows Firewall state” set to “On” and “Incoming connections” is “Allow all connections …”. Then click the red “X” at the top right of the window to exit.</p>
+</div>
+
+<div class="TFA">
+    <p>Try installing the runtime system again and hopefully this should now install without any errors.</p>
+</div>
+
+<div class="TFA">
+    <h2>Running report which couldn’t be found in the …<system>\core\bin folder</h2>
+    <p>If you run a report which is initiated but the report log shows that the report dll couldn’t be found.</p>
+</div>
+
+<div class="TFA">
+    <h3>The issue is that the report dll couldn’t be found because the folder name is incorrect ie. “LANDAT” which should be “LANDATA”.</h3>
+</div>
+
+<div class="TFA">
+    <h3>Then you’ll need to check the SQL runtime database (ta-devabdb-05) for configuring the Powershell scripts</h3>
+</div>
+
+<div class="TFA">
+    <h2>Can’t connect after cloning a runtime database</h2>
+    <p>After cloning a runtime database (eg. DLDEV4DB as DLDEV5DB) and using winforms and you can’t connect to the runtime system it could mean that you’ll need to re-establish the connection.</p>
+</div>
+
+<div class="TFA">
+    <p>Do a SQL on the database system (eg. DLDEV3DB) and you’ll notice that it’s missing one of the system files “dbo.SysStatus”. This will need to be created by the following steps below.</p>
+</div>
+
+<div class="TFA">
+    <h3>To do this you’ll need to do the following steps.</h3>
+    <ol>
+        <li>Use admin tool to remove the runtime system from the database.</li>
+        <li>Choose to “Retain the database” but you can remove the “COM+…” settings as the install later will fix this (also for some systems the COM+ settings may need to be redone eg. Landata for the “Activate directory” to allow for ABSuiteExternalUtils to work correctly).</li>
+        <li>Then “Detach” the database from the “DSR_Remote_DEVABDB05” configuration.</li>
+        <li>Then “Attach” the database to the “DSR_Remote_DEVABDB05” configuration.</li>
+        
+        <div class="TFA">
+          <h2>This will create the “dbo.SysStatus” system table to the SQL database.</h2>
+          <ol>
+              <li>Do another Install of the runtime system. So that we can attach the runtime system again back to the database.</li>
+          </ol>
+      </div>
+      
+      <div class="TFA">
+          <h2>Can’t stop a runtime database system</h2>
+          <h3>Sometimes even when you’ve modified the NGRuntime.xmls file to try and stop the runtime system it may not work. This is noticeable with the older version of AB Suite (eg. AB Suite version 2.0 or earlier). So in order to stop the runtime system then the following table on SQL will need to be updated. Edit the “dbo.SysStatus” table and update the “SystemStatus” value from “R” (Running) to “S” (Stop).</h3>
+          <ul>
+              <li>Can’t display some screens on winform runtime system. If you can’t navigate to some screen it could mean that the winform screen isn’t downloading to your local folder. To trace what’s happening then turn on logging temporary by modifying the ispec.xml file.</li>
+          </ul>
+      </div>
+      
+      <div class="TFA">
+          <h2>AB Suite properties and ispec.xml file</h2>
+          <ul>
+              <li>Find the path where the ispec.xml file is located.</li>
+              <li>Line 10 <code>&lt;localDownloadDirectory&gt;</code> is the both the source and destination of where the screen .dll is copied from for winforms. This location is same for where winforms are store on the runtime server (eg. ta-devabapp-05) and your local vdi (eg. d: drive).</li>
+              <li>To turn on logging change lines 18 and 19.
+                  <ul>
+                      <li>Set <code>&lt;EnableLogging&gt;</code> = “True”.</li>
+                      <li>Set <code>&lt;logFile&gt;</code> = “D:\client.log” (the filename can be anything you choose).</li>
+                  </ul>
+              </li>
+              <li>Remember to turn off the logging after you’ve finished.</li>
+              <li>Note 1: You don’t need to stop/start the runtime system. It’s when you open up winforms that the ispec.xml configuration is loaded.</li>
+              <li>Note 2: When a runtime system is generated again then the log settings are reset.</li>
+          </ul>
+      </div>
+      
+      <div class="TFA">
+          <h2>Winform .dll files locations and logging</h2>
+          <ul>
+              <li>This is the location of where the source winform .dll files are located.</li>
+              <li>This is the location where your winform .dll files are copied to on your local VDI drive when you invoke a screen via winforms.</li>
+              <li>So by analysing the log file created you can determine if the winform files are copied to your local VDI. Then check the log files to see what messages come out to determine the issue.</li>
+          </ul>
+      </div>
+      
+
+
+
+     </td>
+   </tr>
+ </table>
+
+
+ <br/>
+ <br/>
+
+ <!-- FOOTER -->
+ <font size="-3">
+    Copyright  Unisys 2024 |  For Internal Use Only |  <a href="mailto:NZNZTAOpsSupport@nz.unisys.com">Contact</a>
+ </font>
+
+ <br/>
+ <font size="-3">Version 1.0.0</font>
+
+
+</body>
+</html>

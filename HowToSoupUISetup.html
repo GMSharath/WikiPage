@@ -1,0 +1,145 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="STYLE/main.css">
+    <title>NZTADEVHandbook</title>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Suit</title>
+</head>
+<body>
+    
+  <!-- HEADER -->
+  <!-- <div style="font-family: Verdana, Helvetica, sans-serif;background: #ffffff;margin-right: 0%;margin-left: 0%;padding: 0.5em;border-top: 1px solid;border-left: 1px solid;border-right: 1px solid;border-color: #bbbbbb;"> -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="headline">
+       <tr>
+         <td>
+           <a class="logo" href="index.html">
+           <img align="left" border="0" alt="UNISYS" src="IMG/UNISYS.png">
+            </a>
+         </td>
+         <td align="center">
+           <h1 >Waka Kotahi ABSuite Handbook</h1>
+           <br>
+         </td>
+         <td>
+           <a class="logo" href="index.html">
+           <img align="right" border="0" alt="NZTA" src="IMG/NZTA.png">
+            </a>
+         </td>
+       </tr>					 
+    </table>
+ </div>
+
+
+ <!-- MENU -->
+ <table>
+   <tr>
+     <td width="10">&nbsp;</td>
+     <td>
+       <span class="pageHeader">How To...</span>
+     </td>
+   </tr>
+ </table>
+
+ <div class="menu">
+   <a href='index.html'>Home</a> |
+   <a href='#'>Search</a> |
+   <a href='#'>HD Handbook</a> |
+ </div>
+
+ <!-- CONTENTS -->
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">    
+   <tr>
+     <!-- SIDEBAR -->
+     <td nowrap class="leftMenu" valign="top" width="10%">
+       <a class="topic" href="index.html">How-To...</a><br/>
+       <a class="topic" href="ProjectCodes.html">ProjectCodes</a><br/>
+       <a class="topic" href="Servers.html">Servers</a><br/>
+       <a class="topic" href="Tools.html">Tools</a><br/>
+       <a class="topic" href="People.html">People</a><br/>
+
+       <br/>
+       <strong>Support</strong><br/>
+       <a class="topic" href="ABSuiteReleases.html">ABSuiteReleases</a> <br/>
+       <a class="topic" href="ABSuiteSetup.html">ABSuiteSetup</a> <br/>
+       <a class="topic" href="TroubleShoot.html">TroubleShooting</a> <br/>
+
+
+       <br/>
+       <hr />
+       <strong>Releases</strong><br/>
+       <a class="topic" href="Projects.html">Projects</a><br/>
+       <a class="topic" href="AzureDevOps.html">Azure DevOps</a><br/>
+
+       <br/>
+       <hr />
+       <strong>Production</strong><br/>
+       <a class="topic" href="NZTASignOn.html">NZTA Register</a><br/>
+       <a class="topic" href="AC.html">AC</a><br/>
+       <a class="topic" href="DLR.html">DLR</a><br/>
+       <a class="topic" href="MVR.html">MVR</a><br/>
+
+       <br/>
+       <hr />
+       <a class="topic" href="WikiSearch.html">WikiSearch</a><br/>
+       <!-- <hr />
+       <a class="topic" href="EasterEggs.html">EasterEggs</a><br/>
+       <hr /> -->
+     </td>
+
+ 
+   
+ 
+     <td valign="top">
+      <h2>Kindly find the brief steps to set up the SoapUI</h2>
+      <ol>
+          <li> Before beginning with the SoapUI setup, ensure the respectiveÂ stream has the following files likeÂ ABSuite ConnectorTestsService, DLRCF, and LandataCF.
+          </li> <br>
+          
+          <img src="SoapUI IMG\SoapUI_img1.png" maxWidth="30px"> <br><br>
+          <li> We need to export the ClientFramework folder from the respective Stream & give relevant name to the exported folder. <br>
+               Eg:LandataCF_2023_100_export.</li><br><br>
+               <img src="SoapUI IMG\SoapUI_img2.png" maxWidth="30px"> <br><br>
+               <img src="SoapUI IMG\SoapUI_img3.png" maxWidth="30px"> <br><br>
+          <li> Disconnect from team foundation server.</li> 
+                <img src="SoapUI IMG\SoapUI_img4.png" maxWidth="30px"> <br><br>
+          
+          <li> Create a .NET model and template as (New application from a file i.e., export model.)
+                & give relevant name like Landata2023_100NewP.</li> <br><br>
+                <img src="SoapUI IMG\SoapUI_img5.png" maxWidth="30px"> <br><br>
+
+          <li> Confirm the database in SQL that you have created.</li><br><br>
+                <img src="SoapUI IMG\SoapUI_img6.png" maxWidth="30px"> <br><br>
+
+          <li> Create one more project and template as âNew application from an existing modelâ and give relevant name like Landata2023_100CFP.</li> <br><br>
+                <img src="SoapUI IMG\SoapUI_img7.png" maxWidth="30px"> <br><br>
+                <img src="SoapUI IMG\SoapUI_img8.png" maxWidth="30px"> <br><br>
+
+          <li>Change the client framework properties as shown below and click on Apply.<br>
+            It will begin to create files (.CF files), which will be imported into the ABSuite Test Connection Services folder. </li><br><br>
+               <img src="SoapUI IMG\SoapUI_img9.png" maxWidth="30px"> <br><br>
+               <img src="SoapUI IMG\SoapUI_img10.png" maxWidth="30px"> <br><br>
+          <li>open these files in file explorer (right click on model and open in file explore) and close this solution.</li><br>
+          <li> Now connect back to our team foundation server (TFS).</li><br>
+      </ol>
+
+</td>
+   </tr>
+ </table>
+
+
+ <br/>
+ <br/>
+
+ <!-- FOOTER -->
+ <font size="-3">
+    Copyright  Unisys 2024 |  For Internal Use Only |  <a href="mailto:NZNZTAOpsSupport@nz.unisys.com">Contact</a>
+ </font>
+
+ <br/>
+ <font size="-3">Version 1.0.0</font>
+
+
+</body>
+</html>

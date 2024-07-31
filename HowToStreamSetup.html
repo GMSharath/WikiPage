@@ -1,0 +1,359 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="STYLE/main.css">
+    <title>NZTADEVHandbook</title>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Suit</title>
+</head>
+<body>
+    
+  <!-- HEADER -->
+  <!-- <div style="font-family: Verdana, Helvetica, sans-serif;background: #ffffff;margin-right: 0%;margin-left: 0%;padding: 0.5em;border-top: 1px solid;border-left: 1px solid;border-right: 1px solid;border-color: #bbbbbb;"> -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="headline">
+       <tr>
+         <td>
+           <a class="logo" href="Wiki">
+           <img align="left" border="0" alt="UNISYS" src="IMG/UNISYS.png">
+            </a>
+         </td>
+         <td align="center">
+           <h1 >NZTA ABSuit Handbook</h1>
+           <br>
+         </td>
+         <td>
+           <a class="logo" href="Wiki">
+           <img align="right" border="0" alt="NZTA" src="IMG/NZTA.png">
+            </a>
+         </td>
+       </tr>					 
+    </table>
+ </div>
+
+
+ <!-- MENU -->
+ <table>
+   <tr>
+     <td width="10">&nbsp;</td>
+     <td>
+       <span class="pageHeader">How To...</span>
+     </td>
+   </tr>
+ </table>
+
+ <div class="menu">
+   <a href='index.html'>Home</a> |
+   <a href='#'>Search</a> |
+ </div>
+
+ <!-- CONTENTS -->
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">    
+   <tr>
+     <!-- SIDEBAR -->
+     <td nowrap class="leftMenu" valign="top" width="10%">
+       <a class="topic" href="index.html">How-To...</a><br/>
+       <a class="topic" href="ProjectCodes.html">ProjectCodes</a><br/>
+       <a class="topic" href="Servers.html">Servers</a><br/>
+       <a class="topic" href="Tools.html">Tools</a><br/>
+       <a class="topic" href="People.html">People</a><br/>
+
+       <br/>
+       <strong>Support</strong><br/>
+       <a class="topic" href="ABSuiteReleases.html">ABSuiteReleases</a> <br/>
+       <a class="topic" href="ABSuiteSetup.html">ABSuiteSetup</a> <br/>
+       <a class="topic" href="TroubleShoot.html">TroubleShooting</a> <br/>
+
+
+       <br/>
+       <hr />
+       <strong>Releases</strong><br/>
+       <a class="topic" href="Projects.html">Projects</a><br/>
+       <a class="topic" href="AzureDevOps.html">Azure DevOps</a><br/>
+
+       <br/>
+       <hr />
+       <strong>Production</strong><br/>
+       <a class="topic" href="NZTASignOn.html">NZTA Register</a><br/>
+       <a class="topic" href="AC.html">AC</a><br/>
+       <a class="topic" href="DLR.html">DLR</a><br/>
+       <a class="topic" href="MVR.html">MVR</a><br/>
+
+       <br/>
+       <hr />
+       <a class="topic" href="WikiSearch.html">WikiSearch</a><br/>
+       <!-- <hr />
+       <a class="topic" href="EasterEggs.html">EasterEggs</a><br/>
+       <hr /> -->
+     </td>
+
+ 
+     <td valign="top">
+        
+        <script>
+            function copyToClipboard(elementId) {
+            var text = document.getElementById(elementId).value;
+            navigator.clipboard.writeText(text)
+                .then(function() {
+                console.log('Text copied to clipboard');
+                })
+                .catch(function(err) {
+                console.error('Error copying text: ', err);
+                });
+            }
+        </script>
+            <div class="contents">
+                <div class="TFA">
+                    <h2>Kindly find the brief steps to set up the stream</h2>
+                    <ol>
+                        <li>Create a folder for new environment eg: 2019_110 in VSTS folder.</li>
+                        <li>"Get latest version" in visual studio for access control, land data and DLR environments in the new stream (2019_110)</li>
+                        <li>In case mapping to new stream folder is not done then perform the mapping first.</li>
+                        <li>Next get the DLRLOAD.bat file (similar files for MVR and access control) form previous environment and place it in new DLR. MVR and access control folder under 2019_110 folder</li>
+                        <li>Next update the .bat file with new TFS path and stream name(2019_110)</li>
+                        <li>Run the .bat file as admin.</li>
+                        <li>Follow the same process for MVR and access control.(this process would take a while)</li>
+                    </ol>
+                </div>
+            
+                <div class="TFA">
+                    <h2>While the above is executing perform the below</h2>
+                    <h3>Code back up:</h3>
+                    <ul>
+                        <li>Next stop and disable the cloning db if required. Ideally in SQL 2014 disabling the db is not required. – ACDEV8, LTDEV8, DLDEV8- Admin tool</li>
+                        <li>Directly open SQL server, right click on the db to be cloned --> tasks --: backup  -- ACDEV8, LTDEV8, DLDEV8</li>
+                        <li>Remove the existing location for backup.</li>
+                        <li>Select the path where backup has to be placed (its D:\Microsoft SQL\..).</li>
+                        <li>Mention a meaningful name for the backup file like "DLDEV08_BACKUP_FOR_2019_110.bak". Ensure the extension is mentioned as ".bak"</li>
+                        <li>Also select the backup option as "compressed backup". Click on 'ok' and take the backup.</li>
+                        <li>Perform the same for ACDEV and LTDEV</li>
+                        <li>Enable runtime system of ACDEV8, LTDEV8, DLDEV8 in admin tool.</li>
+                    </ul>
+                </div>
+            
+                <div class="TFA">
+                    <h2>Restoring & attaching DB:</h2>
+                    <ul>
+                        <li>Open SQL server, right click on database --&gt; restore database (back up file) --&gt; change the destination database name to the new db (ACDEV9)</li>
+                        <li>Next open admin tool and click on the main db folder (DSR_REMOTE) --&gt; all tasks --&gt; attach existing database.</li>
+                        <li>Perform the same thing for DLR/MVR and access control.</li>
+                    </ul>
+                </div>
+        
+            <div class="TFA">
+                <h2>Checking SMSFM file:</h2>
+                <ol>
+                    <li>Once the db is restored and .bat file has finished execution, open the ACC/DLR/LANDATA folder in visual studio and identify the smsfm file.</li>
+                    <li>Then check out the file and edit it to change the database name (2019_110). Also verify if the server name is TA-DEVABDB-07.</li>
+                    <!-- Add the rest of the steps here -->
+                </ol>
+            </div>
+        
+            <div class="TFA">
+                <h2>Setup code environment – running .bat files is to setup repository database</h2>
+                <ol>
+                    <li>Create a folder for new environment e.g., 2019_110 in VSTS folder.</li>
+                    <li>"Get latest version" in visual studio for access control, land data, and DLR environments in the new stream (2019_110).</li>
+                    <li>In case mapping to the new stream folder is not done then perform the mapping first.</li>
+                    <li>Next get the DLRLOAD.bat file (similar files for MVR and access control) from the previous environment and place it in the new DLR, MVR, and access control folder under 2019_110 folder.</li>
+                    <li>Update the .bat file with the new TFS path and stream name (2019_110).</li>
+                    <li>Run the .bat file as admin.</li>
+                    <li>Follow the same process for MVR and access control (this process would take a while).</li>
+                </ol>
+            </div>
+        
+            <div class="TFA">
+                <h2>While the above is executing perform the below</h2>
+                <h3>Code back up:</h3>
+                <ul>
+                    <li>Next stop and disable the cloning db if required. Ideally in SQL 2014, disabling the db is not required – ACDEV8, LTDEV8, DLDEV8- Admin tool.</li>
+                    <li>Directly open SQL server, right click on the db to be cloned, then tasks, backup – ACDEV8, LTDEV8, DLDEV8.</li>
+                    <li>Remove the existing location for backup.</li>
+                    <li>Select the path where backup has to be placed (its D:\Microsoft SQL\..).</li>
+                    <li>Mention a meaningful name for the backup file like "DLDEV08_BACKUP_FOR_2019_110.bak". Ensure the extension is mentioned as ".bak".</li>
+                    <li>Select the backup option as "compressed backup". Click on 'ok' and take the backup.</li>
+                    <li>Perform the same for ACDEV and LTDEV.</li>
+                    <li>Enable runtime system of ACDEV8, LTDEV8, DLDEV8 in admin tool.</li>
+                </ul>
+            </div>
+        
+            <div class="TFA">
+                <h2>Remove Existing Database:</h2>
+                <ul>
+                    <li>In admin tool, right click on ACdev9sys, Ltdev9sys, Dldev9sys runtime system, click on delete, uncheck both boxes, click on ok.</li>
+                    <li>Delete ACdev9DB, LTDEV9DB, DLDEV9DB.</li>
+                </ul>
+            </div>
+        
+            <div class="TFA">
+                <h2>Restoring & attaching DB:</h2>
+                <ul>
+                    <li>Open SQL server, right click on database, then restore database (back up file), change the destination database name to the new db (ACDEV9).</li>
+                    <li>Next, open admin tool and click on the main db folder (DSR_REMOTE), then all tasks, attach existing database.</li>
+                    <li>Perform the same thing for DLR/MVR and access control.</li>
+                </ul>
+            </div>
+        
+            <div class="TFA">
+                <h2>Checking SMSFM file:</h2>
+                <ol>
+                    <li>Once the db is restored and .bat file has finished execution, open the ACC/DLR/LANDATA folder in visual studio and identify the smsfm file.</li>
+                    <li>Then check out the file and edit it to change the database name (2019_110). Also verify if the server name is TA-DEVABDB-07.</li>
+                </ol>
+            </div>
+            <div class="TFA">
+                <h2>Checking SMSFM file: (changing the name in SMSFM file will change the name in model level like this)</h2>
+                <ol>
+                    <li>Once the db is restored and .bat file has finished execution, open the ACC/DLR/LANDATA folder in visual studio and identify the smsfm file.</li>
+                    <li>Then check out the file and edit it to change the database name (2019_110). Also verify if the server name is TA-DEVABDB-07.</li>
+                    <li>Once this is done, check all the folder properties for all (model, deploy, segment, presentation, and reports) folders under ACC, DLR, and MVR.</li>
+                    <li>Mainly check if DLDEV'N' is mentioned correctly where 'N' is the DB name.</li>
+                    <li>Once properties are verified, prepare the build gen scripts.</li>
+                    <li>Copy the build gen scripts from the previous environment folder and paste it in new stream folder (2019_110), then modify the server and db name accordingly.</li>
+                    <li>Then copy the build gen scripts folder and paste in your VDI (C:\Data) to execute the build script.</li>
+                    <li>When all are completed, click on "Initiate DLDEV Build" for a full gen. (this is done as a part of first gen after the environment is created)</li>
+                    <li>Similarly run the build script for AC and MVR also.</li>
+                    <OL>
+                        <li>Initiate the “InitiateLtdevBuild_WebBundle_Only_VSTS” bat file for all the three controls AC, DLR, and MVR.</li>
+                        <li>Next run the SQL scripts for DLR, MVR, and access control. This should be done before a mail is dropped to the team.</li>
+                    </OL>
+                </ol>
+            </div>
+            <div class="TFA">
+                <h2>AC System Change SQLs</h2>
+                <div class="text-wrap">
+                    <textarea id="textA">
+SELECT * FROM ACDEV7DB.AC.TGNUM
+/*UPDATE ACDEV7DB.AC.TGNUM SET SYS_ALPHA='Dldev6Sys', PARAM_NAME='DLDEV6' WHERE PARAM_NAME='DLDEV5'
+UPDATE ACDEV7DB.AC.TGNUM SET SYS_ALPHA='Ltdev6Sys', PARAM_NAME='LTDEV6' WHERE PARAM_NAME='LTDEV5'*/
+
+SELECT * FROM ACDEV7DB.AC.TGNUM where PARAM_NAME in ('DLR', 'MVR')
+/*UPDATE ACDEV7DB.AC.TGNUM SET SYS_ALPHA = 'DLDEV6DB  Dldev6Sys      TA-DEVABAPP-07' WHERE PARAM_NAME = 'DLR'
+UPDATE ACDEV7DB.AC.TGNUM SET SYS_ALPHA = 'LTDEV6DB  Ltdev6Sys      TA-DEVABAPP-07' WHERE PARAM_NAME = 'MVR'*/
+
+SELECT database_id, file_id, type, type_desc,name, physical_name FROM sys.master_files
+where physical_name not like '%'+name+'%' and (name like '%BAUDB%' or name like '%DEV%DB%' or name like '%RPT%' or name like '%TSTDB%' or name like '%ROC40DB%')
+SELECT A.name, B.database_id, file_id, type, type_desc,B.name, physical_name 
+from sys.databases as A, sys.master_files as B
+where physical_name not like '%'+B.name+'%' and (B.name like '%BAUDB%' or B.name like '%DEV%DB%' or B.name like '%RPT%' or B.name like '%TSTDB%' or B.name like '%ROC%')
+and B.database_id = A.database_id
+/*alter database ACDEV7DB MODIFY FILE (NAME=ACDEV5DB,NEWNAME=ACDEV7DB)
+alter database ACDEV7DB MODIFY FILE (NAME=ACDEV5DB_log,NEWNAME=ACDEV7DB_log)*/
+
+
+
+
+
+                    </textarea>
+                    <div id="copyToClipboard-a" class="clipboard icon" onclick="copyToClipboard('textA')"></div>
+                    <input type="text" id="textA" value="Text to be copied" style="display: none;">
+                <div>
+            </div>
+        </div>
+        <div class="TFA">
+            <h2>DL System Change SQLs</h2>
+            <div class="text-wrap">
+                <textarea id="textA">
+SELECT * FROM DLDEV7DB.DL.DGNUM where PARAM_NAME like 'AC%'
+/*UPDATE DLDEV7DB.DL.DGNUM SET SYS_ALPHA='Acdev6Sys', PARAM_NAME='ACDEV6' WHERE PARAM_NAME='ACDEV5'*/
+
+SELECT * FROM DLDEV7DB.DL.DTABM where TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT IN ('AC-HUB-DEST', 'ACSYS') ORDER BY KEY1_DAT
+UPDATE DLDEV7DB.DL.DTABM SET ALP1_DAT='ACDEV7DB  Acdev7Sys      TA-DEVABAPP-07' WHERE TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT = 'AC-HUB-DEST'
+UPDATE DLDEV7DB.DL.DTABM SET ALP1_DAT='ACDEV7' WHERE TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT = 'ACSYS'
+
+SELECT * FROM DLDEV7DB.DL.DTABM WHERE TBL_CDE='SYSPARAM' AND MNT ='A' AND KEY1_DAT in ('APP-BIN','PSHELL','PSHELL-SCRPT')
+/*UPDATE DLDEV7DB.DL.DTABM SET ALP1_DAT='D:\ABSuiteRuntime\Dldev6_Windows\DLR' WHERE TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT = 'APP-BIN'*/
+
+
+SELECT * FROM DLDEV7DB.DL.DTABM where TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT in ('SYS-LONG','SYS-SHORT') ORDER BY KEY1_DAT
+/*UPDATE DLDEV7DB.DL.DTABM SET ALP1_DAT='DLDEV6 DEVELOPMENT' WHERE TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT = 'SYS-LONG'
+UPDATE DLDEV7DB.DL.DTABM SET ALP1_DAT='DLDEV6' WHERE TBL_CDE='SYSPARAM' AND MNT = 'A' AND KEY1_DAT = 'SYS-SHORT'*/
+
+
+SELECT database_id, file_id, type, type_desc,name, physical_name FROM sys.master_files
+where physical_name not like '%'+name+'%' and (name like '%BAUDB%' or name like '%DEV%DB%' or name like '%RPT%' or name like '%TSTDB%' or name like '%ROC40DB%')
+SELECT A.name, B.database_id, file_id, type, type_desc,B.name, physical_name 
+from sys.databases as A, sys.master_files as B
+where physical_name not like '%'+B.name+'%' and (B.name like '%BAUDB%' or B.name like '%DEV%DB%' or B.name like '%RPT%' or B.name like '%TSTDB%' or B.name like '%ROC%')
+and B.database_id = A.database_id
+/*alter database DLDEV7DB MODIFY FILE (NAME=DLDEV5DB,NEWNAME=DLDEV7DB)
+alter database DLDEV7DB MODIFY FILE (NAME=DLDEV5DB_log,NEWNAME=DLDEV7DB_log)*/
+                </textarea>
+                <div id="copyToClipboard-a" class="clipboard icon" onclick="copyToClipboard('textA')"></div>
+                <input type="text" id="textA" value="Text to be copied" style="display: none;">
+            <div>
+        </div>
+    </div>            
+            
+            
+        
+        </div>
+        <div class="TFA">
+            <h2>DL System Change SQLs</h2>
+            <div class="text-wrap">
+                <textarea id="textA">
+SELECT * FROM LTDEV7DB.LT.TGNUM WHERE PARAM_NAME like 'AC%'
+/*UPDATE LTDEV7DB.LT.TGNUM SET SYS_ALPHA='Acdev6Sys', PARAM_NAME='ACDEV6' where PARAM_NAME='ACDEV5'*/
+
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME = 'ACSYS' Order by CRE_DTE, CRE_TIME
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA = 'ACDEV6' WHERE PARAM_NAME='ACSYS' and SYS_ALPHA='ACDEV5' AND CRE_DTE=20151111*/
+
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME IN ('AC-HUB-DEST', 'ACC-TRAN-ID', 'ACDB', 'ACSYS', 'DL-HUB-DEST') ORDER BY PARAM_NAME, EFF_DTE, CRE_DTE, CRE_TIME
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='ACDEV6DB  Acdev6Sys      TA-DEVABAPP-07' WHERE PARAM_NAME = 'AC-HUB-DEST' AND CRE_DTE IN (20151111, 20151217)
+UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='ACDEV6' WHERE PARAM_NAME = 'ACC-TRAN-ID' AND CRE_DTE in (20151111, 20161125)
+UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='ACDEV6DB' WHERE PARAM_NAME = 'ACDB' AND SYS_ALPHA = 'ACDEV5DB'
+UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='DLDEV6DB  Dldev6Sys      TA-DEVABAPP-07' WHERE PARAM_NAME = 'DL-HUB-DEST' AND SYS_ALPHA = 'DLDEV5DB  Dldev5Sys      TA-DEVABAPP-07'
+UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='ACDEV6' WHERE PARAM_NAME = 'ACSYS' AND CRE_DTE=20151111*/
+
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME in ('APP-BIN','PSHELL','PSHELLSCRPT1','PSHELLSCRPT2') order by PARAM_NAME, EFF_DTE, CRE_DTE, CRE_TIME
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='D:\ABSuiteRuntime\Ltdev6_Windows\Landata' WHERE PARAM_NAME = 'APP-BIN' AND CRE_DTE=20170213*/
+
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME in ('APP-DEPLOY', 'LFAX10','MR2AFILE','MVRLABELFILE','ICHKSFILE','IRSLTFILE') order by PARAM_NAME, EFF_DTE, CRE_DTE, CRE_TIME
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='Y:\ABSuiteRuntime\Ltdev6_Windows\LANDATA' WHERE PARAM_NAME = 'APP-DEPLOY' AND CRE_DTE=20151111*/
+
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME IN ('SYS-LONG','SYS-SHORT') ORDER BY PARAM_NAME, EFF_DTE, CRE_DTE, CRE_TIME
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='          LTDEV6 DEVELOPMENT' WHERE PARAM_NAME='SYS-LONG' AND CRE_DTE=20151111
+UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='LTDEV6' WHERE PARAM_NAME='SYS-SHORT' AND CRE_DTE=20151111*/
+
+SELECT database_id, file_id, type, type_desc,name, physical_name FROM sys.master_files
+where physical_name not like '%'+name+'%' and (name like '%BAUDB%' or name like '%DEV%DB%' or name like '%RPT%' or name like '%TSTDB%' or name like '%ROC40DB%')
+SELECT A.name, B.database_id, file_id, type, type_desc,B.name, physical_name 
+from sys.databases as A, sys.master_files as B
+where physical_name not like '%'+B.name+'%' and (B.name like '%BAUDB%' or B.name like '%DEV%DB%' or B.name like '%RPT%' or B.name like '%TSTDB%' or B.name like '%ROC%')
+and B.database_id = A.database_id
+/*alter database LTDEV7DB MODIFY FILE (NAME=LTDEV5DB,NEWNAME=LTDEV7DB)
+alter database LTDEV7DB MODIFY FILE (NAME=LTDEV5DB_log,NEWNAME=LTDEV7DB_log)*/
+
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME='EOM-LOCN' ORDER BY CRE_DTE DESC
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='D:\ABSuiteRuntime\Ltdev6_Windows\LANDATA' WHERE PARAM_NAME='EOM-LOCN' AND CRE_DTE=20161125*/
+SELECT * FROM LTDEV7DB.LT.TSYS WHERE PARAM_NAME='VCFDIR1' ORDER BY CRE_DTE DESC
+/*UPDATE LTDEV7DB.LT.TSYS SET SYS_ALPHA='y$\ABSuiteRuntime\Ltdev6_Windows\LANDATA' WHERE PARAM_NAME='VCFDIR1' AND CRE_DTE=20161125*/
+                </textarea>
+                <div id="copyToClipboard-a" class="clipboard icon" onclick="copyToClipboard('textA')"></div>
+                <input type="text" id="textA" value="Text to be copied" style="display: none;">
+            <div>
+        </div>
+    </div>            
+            
+            
+        
+        </div>
+     </td>
+   </tr>
+ </table>
+
+
+ <br/>
+ <br/>
+
+ <!-- FOOTER -->
+ <font size="-3">
+    Copyright  Unisys 2024 |  For Internal Use Only |  <a href="mailto:NZNZTAOpsSupport@nz.unisys.com">Contact</a>
+ </font>
+
+ <br/>
+ <font size="-3">Version 1.0.0</font>
+
+
+</body>
+</html>
